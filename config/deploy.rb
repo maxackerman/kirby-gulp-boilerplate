@@ -7,6 +7,9 @@ set :repo_url, "git@github.com:maxackerman/kirby-boilerplate.git"
 # use local ssh key, to give server access to github
 set :ssh_options, forward_agent: true
 
+# path to find Capistrano
+set :default_env, { path: "/usr/local/bin:$PATH" }
+
 # set linked directoires that are not overwritten on server
 append :linked_dirs, 'content', 'site/accounts', 'site/cache', 'media', 'assets/avatars'
 

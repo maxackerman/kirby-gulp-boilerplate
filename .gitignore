@@ -27,6 +27,9 @@ Icon
 # ---------------
 /content/*
 
+# Capistrano log
+/log
+
 # -------------SECURITY-------------
 # NEVER publish these files via Git!
 # -------------SECURITY-------------

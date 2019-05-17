@@ -9,6 +9,7 @@ set :ssh_options, forward_agent: true
 
 # path to find Capistrano
 set :default_env, { path: "/usr/local/bin:$PATH" }
+SSHKit.config.command_map[:composer] = "/usr/local/bin/composer"
 
 # set linked directoires that are not overwritten on server
 append :linked_dirs, 'content', 'site/accounts', 'site/cache', 'media', 'assets/avatars'

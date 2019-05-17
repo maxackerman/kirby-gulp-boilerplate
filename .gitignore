@@ -1,0 +1,54 @@
+# System files
+# ------------
+
+Icon
+.DS_Store
+
+# Temporary files
+# ---------------
+
+/media/*
+
+# Composer
+# ---------------
+/kirby
+/vendor
+
+# Node
+# ---------------
+/node_modules
+
+# Compiled files
+# ---------------
+/assets/css/*
+/assets/js/*
+
+# Content
+# ---------------
+/content/*
+
+# -------------SECURITY-------------
+# NEVER publish these files via Git!
+# -------------SECURITY-------------
+
+# Cache Files
+# ---------------
+
+/site/cache/*
+!/site/cache/index.html
+
+# Accounts
+# ---------------
+
+/site/accounts/*
+!/site/accounts/index.html
+
+# Sessions
+# ---------------
+
+/site/sessions/*
+!/site/sessions/index.html
+
+# License
+# ---------------
+/site/config/.license

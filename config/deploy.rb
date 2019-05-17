@@ -7,9 +7,11 @@ set :repo_url, "git@github.com:maxackerman/kirby-boilerplate.git"
 # use local ssh key, to give server access to github
 set :ssh_options, forward_agent: true
 
-# path to find Capistrano
-set :default_env, { path: "/usr/local/bin:$PATH" }
-SSHKit.config.command_map[:composer] = "/usr/local/bin/composer"
+SSHKit.config.command_map[:composer] = "php #{shared_path.join("composer.phar")}"
+
+namespace :deploy do
+  after :starting, 'composer:install_executable'
+end
 
 # set linked directoires that are not overwritten on server
 append :linked_dirs, 'content', 'site/accounts', 'site/cache', 'media', 'assets/avatars'

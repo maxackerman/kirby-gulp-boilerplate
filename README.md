@@ -6,6 +6,7 @@
 ## Setup
 - Run `npm install`
 - Run `bundle install`
+- Run `composer install`
 - You'll need to populate the content folder for kirby to run locally
 
 ## Development

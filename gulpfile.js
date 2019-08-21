@@ -1,6 +1,6 @@
 var gulp = require('gulp')
 var del = require('del')
-var connect = require('gulp-connect-php')
+var dotenv = require('dotenv')
 var browserSync  = require('browser-sync')
 var sourcemaps = require('gulp-sourcemaps')
 var sass = require('gulp-sass')
@@ -12,20 +12,15 @@ var uglify = require('gulp-uglify')
 var source = require('vinyl-source-stream')
 var log = require('gulplog')
 
+dotenv.config()
+
 const clean = () => del(['assets/css','assets/js'])
 
 const serve = (done) => {
-  // start PHP server
-  connect.server({
-    stdio: 'ignore',
-    router: 'kirby/router.php'
-  }, function (){
-    // run through browsersync
-    browserSync({
-      proxy: 'http://127.0.0.1:8000',
-      open: 'external',
-      ghostMode: false
-    })
+  browserSync({
+    proxy: process.env.LOCAL_URL,
+    open: 'external',
+    ghostMode: false
   })
   done()
 }

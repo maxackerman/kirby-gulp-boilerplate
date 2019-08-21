@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title><?php echo $site->title()->html() ?> | <?php echo $page->title()->html() ?></title>
+  <title><?php echo html($site->title());  e($page->isHomePage(), '', ' - ' . html($page->title()) ) ?></title>
   <meta name="description" content="<?php echo $site->description()->html() ?>">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">

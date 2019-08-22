@@ -8,7 +8,7 @@ set :repo_url, "git@github.com:maxackerman/kirby-boilerplate.git"
 set :ssh_options, forward_agent: true
 
 # set linked directoires that are not overwritten on server
-append :linked_dirs, 'content', 'site/accounts', 'site/cache', 'media', 'assets/avatars'
+append :linked_dirs, 'content', 'site/accounts', 'site/sessions', 'site/cache', 'media', 'assets/avatars'
 
 # set linked files
 append :linked_files, 'site/config/.license'

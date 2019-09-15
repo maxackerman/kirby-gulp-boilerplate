@@ -13,8 +13,8 @@
 `npm run build`
 
 ## Deploy
-- `cap production deploy` will deploy the `dev` branch to staging
-- `cap staging deploy` will deploy the `master` branch to production
+- `cap production deploy` will deploy the `master` branch to staging
+- `cap staging deploy` will deploy the `dev` branch to production
 
 ## Troubleshooting
 ### Deployment

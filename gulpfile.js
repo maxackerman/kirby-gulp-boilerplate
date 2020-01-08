@@ -80,7 +80,7 @@ function reload(done){
 const watch = () => {
   gulp.watch('src/**/*.scss', stylesDev)
   gulp.watch('src/**/*.js', gulp.series(scriptsDev, reload))
-  gulp.watch('**/*.php', reload)
+  gulp.watch('site/**/*.php', reload)
 }
 
 const dev = gulp.series(clean, stylesDev, scriptsDev, serve, watch)

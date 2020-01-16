@@ -4,11 +4,14 @@
 - [Browserify](http://browserify.org/) + [Babelify](https://www.npmjs.com/package/babelify)
 - [BrowserSync](https://www.browsersync.io/)
 
+## Deploy
+- [Capistrano](https://capistranorb.com/)
+
 ## Requirements
 - [Composer](https://getcomposer.org/)
 - [Node](https://nodejs.org/)
 - Local server running PHP (e.g. [Valet](https://laravel.com/docs/5.8/valet) or [MAMP](https://www.mamp.info/))
-- Ruby version 2.0+ (optional for deploy)
+- Ruby (optional for deploy)
 
 ## Setup
 - Run `npm install`
@@ -18,6 +21,9 @@
 
 ## Development
 `npm run build`
+
+## Update
+- `composer update` to update Kirby
 
 ## Deploy
 - `cap production deploy` will deploy the `master` branch to production

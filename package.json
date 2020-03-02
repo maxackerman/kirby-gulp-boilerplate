@@ -11,11 +11,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.8.3",
-    "@babel/preset-env": "^7.8.3",
+    "@babel/core": "^7.8.6",
+    "@babel/preset-env": "^7.8.6",
+    "babel-loader": "^8.0.6",
     "babelify": "^10.0.0",
     "browser-sync": "^2.26.7",
-    "browserify": "^16.5.0",
     "del": "^5.1.0",
     "dotenv": "^8.2.0",
     "gulp": "^4.0.2",
@@ -23,10 +23,8 @@
     "gulp-cli": "^2.2.0",
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
-    "gulp-uglify": "^3.0.2",
     "gulplog": "^1.0.0",
-    "vinyl-buffer": "^1.0.1",
-    "vinyl-source-stream": "^2.0.0"
+    "webpack-stream": "^5.2.1"
   },
   "dependencies": {}
 }

@@ -5,12 +5,8 @@ var browserSync  = require('browser-sync')
 var sourcemaps = require('gulp-sourcemaps')
 var sass = require('gulp-sass')
 var autoprefixer = require('gulp-autoprefixer')
-var browserify = require('browserify')
-var babel = require('babelify')
-var buffer = require('vinyl-buffer')
-var uglify = require('gulp-uglify')
-var source = require('vinyl-source-stream')
 var log = require('gulplog')
+var webpack = require('webpack-stream');
 
 dotenv.config()
 
@@ -43,33 +39,65 @@ const stylesProd = (watch) => {
 }
 
 const scriptsDev = () => {
-  var b = browserify({
-    entries: 'src/js/index.js',
-    debug: true
-  })
-  return b
-    .transform(babel.configure({ presets: ["@babel/preset-env"] })).bundle()
-    .pipe(source('app.js'))
-    .pipe(buffer())
-    .pipe(sourcemaps.init({loadMaps: true}))
-    .on('error', log.error)
-    .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./assets/js'))
+  return gulp.src('./src/js/index.js')
+    .pipe(webpack({
+      stats: {
+        // less info in console
+        entrypoints: false,
+        children: false
+      },
+      output: {
+        filename: 'app.js',
+      },
+      mode: 'development',
+      devtool: 'source-map-inline',
+      module: {
+        rules: [
+        {
+          test: /\.js$/,
+          exclude: /(node_modules)/,
+          use: {
+            loader: 'babel-loader?cacheDirectory=true',
+            options: {
+              presets: [['@babel/preset-env', { modules: false }]],
+              // plugins: ['@babel/plugin-syntax-dynamic-import']
+            }
+          }
+        }
+        ]
+      }
+    }))
+    .pipe(gulp.dest('assets/js'));
 }
 
 const scriptsProd = () => {
-  var b = browserify({
-    entries: './src/js/index.js',
-    debug: false
-  })
-  return b
-    .transform(babel.configure({ presets: ['@babel/preset-env'] }))
-    .bundle()
-    .pipe(source('app.js'))
-    .pipe(buffer())
-    .pipe(uglify())
-    .on('error', log.error)
-    .pipe(gulp.dest('./assets/js'))
+  return gulp.src('./src/js/index.js')
+    .pipe(webpack({
+      output: {
+        filename: 'app.js',
+      },
+      mode: 'production',
+      optimization: {
+        usedExports: true,
+      },
+      devtool: false,
+      module: {
+        rules: [
+        {
+          test: /\.js$/,
+          exclude: /(node_modules)/,
+          use: {
+            loader: 'babel-loader?cacheDirectory=true',
+            options: {
+              presets: [['@babel/preset-env', { modules: false }]],
+              // plugins: ['@babel/plugin-syntax-dynamic-import']
+            }
+          }
+        }
+        ]
+      }
+    }))
+    .pipe(gulp.dest('assets/js'));
 }
 
 function reload(done){

@@ -1,7 +1,7 @@
 ## Build tools
 - [Gulp](https://gulpjs.com/)
 - [Sass](https://sass-lang.com/) + [Autoprefixer](https://www.npmjs.com/package/gulp-autoprefixer)
-- [Browserify](http://browserify.org/) + [Babelify](https://www.npmjs.com/package/babelify)
+- [Webpack](https://webpack.js.org/) + [Babel](https://babeljs.io/)
 - [BrowserSync](https://www.browsersync.io/)
 
 ## Deploy

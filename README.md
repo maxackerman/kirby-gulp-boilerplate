@@ -20,7 +20,9 @@
 - You'll need to populate the content folder for kirby to run locally
 
 ## Development
-`npm run build`
+- Setup a local server, and add the local url to `.env`
+- `npm run build` this will watch files and process them on when updated. Updates will be reflected on browsersync proxy url.
+- `npm run build` this will run once and generate the minified produciton files.
 
 ## Update
 - `composer update` to update Kirby

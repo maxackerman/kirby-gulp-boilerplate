@@ -1,5 +1,5 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.11.0"
+lock "~> 3.14.0"
 
 set :application, "kirby-boilerplate"
 set :repo_url, "git@github.com:maxackerman/kirby-boilerplate.git"

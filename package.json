@@ -16,15 +16,14 @@
     "babel-loader": "^8.1.0",
     "babelify": "^10.0.0",
     "browser-sync": "^2.26.12",
-    "del": "^5.1.0",
+    "del": "^6.0.0",
     "dotenv": "^8.2.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-cli": "^2.3.0",
-    "gulp-sass": "^4.1.0",
-    "gulp-sourcemaps": "^2.6.5",
+    "gulp-dart-sass": "^1.0.2",
+    "gulp-sourcemaps": "^3.0.0",
     "gulplog": "^1.0.0",
     "webpack-stream": "^6.1.0"
-  },
-  "dependencies": {}
+  }
 }

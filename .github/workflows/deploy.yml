@@ -9,23 +9,23 @@ jobs:
     env:
       DESTINATION: "devserver@deploy.us1.frbit.com"
       EXCLUDE: |
-        '.git',
-        '.github',
-        'content',
-        'media',
-        'node_modules',
-        'site/accounts',
-        'site/cache',
-        'site/config/.license',
-        'site/sessions',
-        'src',
-        '.env',
-        '.gitignore',
-        'composer.json',
-        'composer.lock',
-        'gulpfile.js',
-        'package.json',
-        'package-lock.json'
+        .git
+        .github
+        content
+        media
+        node_modules
+        site/accounts
+        site/cache
+        site/config/.license
+        site/sessions
+        src
+        .env
+        .gitignore
+        composer.json
+        composer.lock
+        gulpfile.js
+        package.json
+        package-lock.json
 
     runs-on: ubuntu-latest
 

@@ -1,0 +1,68 @@
+name: Github Deploy
+
+on:
+  push:
+    branches: [deploy-github-action]
+
+jobs:
+  build-and-deploy:
+    env:
+      DESTINATION: "devserver@deploy.us1.frbit.com"
+      EXCLUDE: |
+        - '.git'
+        - '.github'
+        - 'content'
+        - 'media'
+        - 'node_modules'
+        - 'site/accounts'
+        - 'site/cache'
+        - 'site/config/.license'
+        - 'site/sessions'
+        - 'src'
+        - '.env'
+        - '.gitignore'
+        - 'composer.json'
+        - 'composer.lock'
+        - 'gulpfile.js'
+        - 'package.json'
+        - 'package-lock.json'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # Pull repository into the current pipeline
+      - name: pull repository
+        uses: actions/checkout@v2
+
+      # Setup container with private SSH Key (used by rsync)
+      - name: Loads private SSH key
+        uses: webfactory/ssh-agent@v0.4.1
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # Install PHP dependencies
+      - name: Composer install
+        run: composer install --prefer-dist --no-interaction --no-dev --no-progress --optimize-autoloader --ignore-platform-reqs
+
+      # Use a specific version of Node
+      - name: Use Node.js 15.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: "15.x"
+
+      # Install NPM dependencies
+      - name: NPM install
+        run: npm ci
+
+      # Run Gulp Build
+      - name: Gulp Build
+        run: npx gulp build
+
+      # Deploy Site
+      - name: Deploy with rsync
+        run: |
+          rsync -azh --delete-after --exclude=$EXCLUDE -e 'ssh -o StrictHostKeyChecking=no' ./ --rsync-path='rsync' $DESTINATION:~/
+
+      # Clear Kirby Cache
+      - name: Invalidate Cache
+        run: ssh $DESTINATION 'rm -f -r ~/site/cache/*'

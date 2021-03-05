@@ -8,24 +8,6 @@ jobs:
   build-and-deploy:
     env:
       DESTINATION: "devserver@deploy.us1.frbit.com"
-      EXCLUDE: |
-        .git
-        .github
-        content
-        media
-        node_modules
-        site/accounts
-        site/cache
-        site/config/.license
-        site/sessions
-        src
-        .env
-        .gitignore
-        composer.json
-        composer.lock
-        gulpfile.js
-        package.json
-        package-lock.json
 
     runs-on: ubuntu-latest
 
@@ -61,7 +43,7 @@ jobs:
       # Deploy Site
       - name: Deploy with rsync
         run: |
-          rsync -azh --delete-after --exclude=$EXCLUDE -e 'ssh -o StrictHostKeyChecking=no' ./ --rsync-path='rsync' $DESTINATION:~/
+          rsync -azh --delete-after --exclude-from='./.github/workflows/exclude.txt' -e 'ssh -o StrictHostKeyChecking=no' ./ --rsync-path='rsync' $DESTINATION:~/
 
       # Clear Kirby Cache
       - name: Invalidate Cache

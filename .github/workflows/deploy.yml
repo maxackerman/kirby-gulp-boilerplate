@@ -7,7 +7,7 @@ on:
 jobs:
   build-and-deploy:
     env:
-      DESTINATION: "devserver@deploy.us1.frbit.com"
+      DESTINATION: "serveit@deploy.us1.frbit.com"
 
     runs-on: ubuntu-latest
 

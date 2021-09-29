@@ -1,12 +1,11 @@
-var gulp = require('gulp')
-var del = require('del')
-var dotenv = require('dotenv')
-var browserSync  = require('browser-sync')
-var sourcemaps = require('gulp-sourcemaps')
-var sass = require('gulp-dart-sass')
-var autoprefixer = require('gulp-autoprefixer')
-var log = require('gulplog')
-var webpack = require('webpack-stream');
+import gulp from 'gulp';
+import del from 'del';
+import dotenv from 'dotenv';
+import browserSync  from 'browser-sync';
+import sourcemaps from 'gulp-sourcemaps';
+import sass from 'gulp-dart-sass';
+import autoprefixer from 'gulp-autoprefixer';
+import webpack from 'webpack-stream';
 
 dotenv.config()
 
@@ -50,7 +49,7 @@ const scriptsDev = () => {
         filename: 'app.js',
       },
       mode: 'development',
-      devtool: 'source-map-inline',
+      devtool: 'source-map',
       module: {
         rules: [
         {
@@ -114,5 +113,4 @@ const watch = () => {
 const dev = gulp.series(clean, stylesDev, scriptsDev, serve, watch)
 const build = gulp.series(clean, stylesProd, scriptsProd)
 
-exports.default = dev
-exports.build = build
+export { dev, build };

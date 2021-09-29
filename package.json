@@ -3,26 +3,26 @@
   "version": "1.0.0",
   "description": "Kirby is a file-based CMS. Easy to setup. Easy to use. Flexible as hell.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "build": "npx gulp build",
-    "dev": "npx gulp",
+    "dev": "npx gulp dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.14.3",
-    "@babel/preset-env": "^7.14.2",
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
     "babel-loader": "^8.1.0",
-    "browser-sync": "^2.26.12",
+    "browser-sync": "^2.27.5",
     "del": "^6.0.0",
-    "dotenv": "^9.0.2",
+    "dotenv": "^10.0.0",
     "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^7.0.1",
+    "gulp-autoprefixer": "^8.0.0",
     "gulp-cli": "^2.3.0",
     "gulp-dart-sass": "^1.0.2",
     "gulp-sourcemaps": "^3.0.0",
-    "gulplog": "^1.0.0",
-    "webpack-stream": "^6.1.0"
+    "webpack-stream": "^7.0.0"
   }
 }

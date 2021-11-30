@@ -1,0 +1,39 @@
+.grid-wrapper{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.column-wrapper{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.col-pad{
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.col-padding{
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@for $i from 0 through $grid-columns {
+  .col-#{$i} {
+    width: $i / $grid-columns * 100%;
+  }
+}
+
+@each $breakpoint-name, $breakpoint-size in $breakpoints {
+  @media (min-width: #{$breakpoint-size}) {
+    @for $i from 0 through $grid-columns {
+      .#{$breakpoint-name}-col-#{$i} {
+        width: $i / $grid-columns * 100%;
+      }
+    }
+  }
+}
+

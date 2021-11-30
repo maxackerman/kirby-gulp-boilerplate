@@ -1,0 +1,19 @@
+// reset browser font-sizes
+*{
+  font-size: 100%;
+}
+
+html{
+  font-family: sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+  font-size: 16px;
+  font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @include break(md){
+    font-size: 18px;
+  }
+  color: var(--text-color);
+}

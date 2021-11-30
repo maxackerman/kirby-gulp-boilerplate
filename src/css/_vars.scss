@@ -1,0 +1,30 @@
+$grid-columns: 12;
+
+// Breakpoints
+$md  : 750px;
+$lg  : 1500px;
+
+$breakpoints : (
+  md  : $md,
+  lg  : $lg,
+);
+
+@mixin break($size) {
+  $breakpoint-found: map-has-key($breakpoints, $size);
+  @if ($breakpoint-found == true) {
+    $breakpoint: map-get($breakpoints, $size);
+    @media (min-width: #{$breakpoint}) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint size " + #{$size} + " doesn't exist.";
+  }
+}
+
+$black: #000000;
+$white: #FFFFFF;
+
+:root{
+  --text-color: #{$black};
+  --bg-color: #{$white};
+}

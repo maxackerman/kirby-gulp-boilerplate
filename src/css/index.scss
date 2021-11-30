@@ -1,8 +1,5 @@
-$color: blue;
-body{
-  color: $color;
-}
-
-.autoprefixer-test {
-    user-select: none;
-}
+@import "reset.scss";
+@import "vars.scss";
+@import "grid.scss";
+@import "typography.scss";
+@import "media.scss";

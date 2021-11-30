@@ -9,9 +9,13 @@
   <?php endforeach; ?>
   </ul>
 
+  <div class="grid-wrapper col-pad">
   <?php foreach($page->images() as $image): ?>
-    <?=  $image->resize(300); ?>
+    <div class="col-6 col-pad">
+      <?php snippet('lazy-image', ['image' => $image]) ?>
+    </div>
   <?php endforeach; ?>
+  </div>
 
 <?php snippet('footer') ?>
 

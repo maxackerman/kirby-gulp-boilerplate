@@ -1,16 +1,19 @@
 import gulp from 'gulp';
+import babel from 'gulp-babel';
+import browserSync  from 'browser-sync';
+import concat from 'gulp-concat';
 import {deleteAsync} from 'del';
 import dotenv from 'dotenv';
-import browserSync  from 'browser-sync';
 import sourcemaps from 'gulp-sourcemaps';
-import sass from 'gulp-dart-sass';
+
+import dartSass from 'sass';
+import gulpSass from 'gulp-sass';
+const sass = gulpSass(dartSass);
 import autoprefixer from 'gulp-autoprefixer';
-import webpack from 'webpack-stream';
 
 dotenv.config()
 
 const clean = await deleteAsync(['assets/css','assets/js']);
-
 
 const serve = (done) => {
   browserSync({
@@ -40,64 +43,22 @@ const stylesProd = (watch) => {
 
 const scriptsDev = () => {
   return gulp.src('./src/js/index.js')
-    .pipe(webpack({
-      stats: {
-        // less info in console
-        entrypoints: false,
-        children: false
-      },
-      output: {
-        filename: 'app.js',
-      },
-      mode: 'development',
-      devtool: 'source-map',
-      module: {
-        rules: [
-        {
-          test: /\.js$/,
-          exclude: /(node_modules)/,
-          use: {
-            loader: 'babel-loader?cacheDirectory=true',
-            options: {
-              presets: [['@babel/preset-env', { modules: false }]],
-              // plugins: ['@babel/plugin-syntax-dynamic-import']
-            }
-          }
-        }
-        ]
-      }
+    .pipe(sourcemaps.init())
+    .pipe(babel({
+      presets: ['@babel/env']
     }))
-    .pipe(gulp.dest('assets/js'));
+    .pipe(concat('all.js'))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('assets/js'))
 }
 
 const scriptsProd = () => {
   return gulp.src('./src/js/index.js')
-    .pipe(webpack({
-      output: {
-        filename: 'app.js',
-      },
-      mode: 'production',
-      optimization: {
-        usedExports: true,
-      },
-      devtool: false,
-      module: {
-        rules: [
-        {
-          test: /\.js$/,
-          exclude: /(node_modules)/,
-          use: {
-            loader: 'babel-loader?cacheDirectory=true',
-            options: {
-              presets: [['@babel/preset-env', { modules: false }]],
-              // plugins: ['@babel/plugin-syntax-dynamic-import']
-            }
-          }
-        }
-        ]
-      }
+    .pipe(babel({
+      presets: ['@babel/env']
     }))
-    .pipe(gulp.dest('assets/js'));
+    .pipe(gulp.dest('assets/js'))
 }
 
 function reload(done){

@@ -1,8 +1,7 @@
 {
   "name": "kirby-boilerplate",
   "version": "1.0.0",
-  "description": "Kirby is a file-based CMS. Easy to setup. Easy to use. Flexible as hell.",
-  "main": "index.js",
+  "description": "Kirby site boilerplate with js css build tools",
   "type": "module",
   "scripts": {
     "build": "npx gulp build",
@@ -12,12 +11,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.17.10",
-    "@babel/preset-env": "^7.17.10",
-    "babel-loader": "^8.2.5",
-    "browser-sync": "^2.27.9",
-    "del": "^6.0.0",
-    "dotenv": "^16.0.0",
+    "@babel/core": "^7.20.12",
+    "@babel/preset-env": "^7.20.2",
+    "babel-loader": "^9.1.2",
+    "browser-sync": "^2.27.11",
+    "del": "^7.0.0",
+    "dotenv": "^16.0.3",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-cli": "^2.3.0",

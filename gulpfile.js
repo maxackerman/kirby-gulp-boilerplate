@@ -1,5 +1,5 @@
 import gulp from 'gulp';
-import del from 'del';
+import {deleteAsync} from 'del';
 import dotenv from 'dotenv';
 import browserSync  from 'browser-sync';
 import sourcemaps from 'gulp-sourcemaps';
@@ -9,7 +9,8 @@ import webpack from 'webpack-stream';
 
 dotenv.config()
 
-const clean = () => del(['assets/css','assets/js'])
+const clean = await deleteAsync(['assets/css','assets/js']);
+
 
 const serve = (done) => {
   browserSync({

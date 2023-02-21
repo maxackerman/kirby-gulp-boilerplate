@@ -1,15 +1,20 @@
 import gulp from 'gulp';
-import del from 'del';
-import dotenv from 'dotenv';
 import browserSync  from 'browser-sync';
+import {deleteAsync, deleteSync} from 'del';
+import dotenv from 'dotenv';
 import sourcemaps from 'gulp-sourcemaps';
-import sass from 'gulp-dart-sass';
+import dartSass from 'sass';
+import gulpSass from 'gulp-sass';
+const sass = gulpSass(dartSass);
 import autoprefixer from 'gulp-autoprefixer';
 import webpack from 'webpack-stream';
 
 dotenv.config()
 
-const clean = () => del(['assets/css','assets/js'])
+const clean = (done) => {
+  deleteSync(['assets/css','assets/js'])
+  done()
+};
 
 const serve = (done) => {
   browserSync({
@@ -20,86 +25,39 @@ const serve = (done) => {
   done()
 }
 
-const stylesDev = () => {
-  return gulp.src('src/css/index.scss')
-    .pipe(sourcemaps.init())
-    .pipe(sass().on('error', sass.logError))
-    .pipe(autoprefixer())
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('assets/css'))
-    .pipe(browserSync.reload({ stream: true }));
-}
+const stylesDev = () => gulp.src('src/css/index.scss')
+  .pipe(sourcemaps.init())
+  .pipe(sass().on('error', sass.logError))
+  .pipe(autoprefixer())
+  .pipe(sourcemaps.write('.'))
+  .pipe(gulp.dest('assets/css'))
+  .pipe(browserSync.reload({ stream: true }));
 
-const stylesProd = (watch) => {
-  return gulp.src('src/css/index.scss')
-    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-    .pipe(autoprefixer())
-    .pipe(gulp.dest('assets/css'))
-}
+const stylesProd = (watch) => gulp.src('src/css/index.scss')
+  .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+  .pipe(autoprefixer())
+  .pipe(gulp.dest('assets/css'))
 
-const scriptsDev = () => {
-  return gulp.src('./src/js/index.js')
-    .pipe(webpack({
-      stats: {
-        // less info in console
-        entrypoints: false,
-        children: false
-      },
-      output: {
-        filename: 'app.js',
-      },
-      mode: 'development',
-      devtool: 'source-map',
-      module: {
-        rules: [
-        {
-          test: /\.js$/,
-          exclude: /(node_modules)/,
-          use: {
-            loader: 'babel-loader?cacheDirectory=true',
-            options: {
-              presets: [['@babel/preset-env', { modules: false }]],
-              // plugins: ['@babel/plugin-syntax-dynamic-import']
-            }
-          }
-        }
-        ]
-      }
-    }))
-    .pipe(gulp.dest('assets/js'));
-}
+const scriptsDev = () => gulp.src('./src/js/index.js')
+  .pipe(webpack({
+    output: {
+      filename: 'app.js',
+    },
+    mode: 'development',
+    devtool: 'source-map'
+  }))
+  .pipe(gulp.dest('assets/js'));
 
-const scriptsProd = () => {
-  return gulp.src('./src/js/index.js')
-    .pipe(webpack({
-      output: {
-        filename: 'app.js',
-      },
-      mode: 'production',
-      optimization: {
-        usedExports: true,
-      },
-      devtool: false,
-      module: {
-        rules: [
-        {
-          test: /\.js$/,
-          exclude: /(node_modules)/,
-          use: {
-            loader: 'babel-loader?cacheDirectory=true',
-            options: {
-              presets: [['@babel/preset-env', { modules: false }]],
-              // plugins: ['@babel/plugin-syntax-dynamic-import']
-            }
-          }
-        }
-        ]
-      }
-    }))
-    .pipe(gulp.dest('assets/js'));
-}
+const scriptsProd = () => gulp.src('./src/js/index.js')
+  .pipe(webpack({
+    output: {
+      filename: 'app.js',
+    },
+    mode: 'production'
+  }))
+  .pipe(gulp.dest('assets/js'));
 
-function reload(done){
+const reload = (done) => {
   browserSync.reload();
   done();
 }
